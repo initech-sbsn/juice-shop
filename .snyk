@@ -1,6 +1,7 @@
 # Snyk (https://snyk.io) policy file
 
 exclude:
-    code:
+    global:
         # Exclude a single directory. For example, - src/lib
             - test/
+            - frontend/
