@@ -23,10 +23,15 @@ module.exports = function profileImageUrlUpload () {
       if (loggedInUser) {
         const imageRequest = request
           .get(url)
+
+
+          
           .on('error', function (err) {
             models.User.findByPk(loggedInUser.data.id).then(user => { return user.update({ profileImage: url }) }).catch(error => { next(error) })
             logger.warn('Error retrieving user profile image: ' + err.message + '; using image link directly')
           })
+          
+          
           .on('response', function (res) {
             if (res.statusCode === 200) {
               const ext = ['jpg', 'jpeg', 'png', 'svg', 'gif'].includes(url.split('.').slice(-1)[0].toLowerCase()) ? url.split('.').slice(-1)[0].toLowerCase() : 'jpg'
